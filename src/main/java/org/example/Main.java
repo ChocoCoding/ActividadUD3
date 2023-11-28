@@ -12,6 +12,10 @@ public class Main {
 
         Controller controller = new Controller(model,v1);
 
+        v1.arrancar();
+
+        v1.setController(controller);
+
 
 
     }

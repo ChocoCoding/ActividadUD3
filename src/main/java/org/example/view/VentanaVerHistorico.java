@@ -1,6 +1,10 @@
 package org.example.view;
 
+import org.example.entities.Alquiler;
+import org.example.entities.Libro;
+
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,10 +20,24 @@ public class VentanaVerHistorico extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
 
+	public void actualizarDatos(ArrayList<Alquiler> listaAlquileres) {
+		String[] columnHeaders = {"LIBRO", "SOCIO", "FECHA_ALQUILER", "FECHA_DEVOLUCION"};
+		DefaultTableModel model = new DefaultTableModel(columnHeaders, 0);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		for (Alquiler al : listaAlquileres) {
+			model.addRow(new Object[] {al.getIsbn(), al.getDNI(), al.getFechaAlquiler(),al.getFechaDevolucion()});
+		}
+
+		table.setModel(model);
+	}
+
 	public VentanaVerHistorico() {
 		setTitle("APP BIBLIOTECA");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 300);
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -32,15 +50,12 @@ public class VentanaVerHistorico extends JFrame {
 		contentPane.add(lblDisponibles);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 60, 392, 174);
+		scrollPane.setBounds(20, 60, 550, 174);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Codigo", "Socio", "Fecha alquiler", "Fecha devolucion" }));
-		table.getColumnModel().getColumn(2).setPreferredWidth(95);
-		table.getColumnModel().getColumn(3).setPreferredWidth(106);
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "LIBRO", "SOCIO", "FECHA_ALQUILER", "FECHA_DEVOLUCION" }));
 	}
 
 }

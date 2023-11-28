@@ -1,6 +1,10 @@
 package org.example.view;
 
+import org.example.entities.Libro;
+import org.example.entities.Socio;
+
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,10 +20,24 @@ public class VentanaLibrosDisponibles extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
 
+	public void actualizarDatos(ArrayList<Libro> listaLibros) {
+		String[] columnHeaders = {"ISBN", "Titulo", "Autor"};
+		DefaultTableModel model = new DefaultTableModel(columnHeaders, 0);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		for (Libro lb : listaLibros) {
+			model.addRow(new Object[] {lb.getIsbn(), lb.getTitulo(), lb.getAutor()});
+		}
+
+		table.setModel(model);
+	}
+
 	public VentanaLibrosDisponibles() {
 		setTitle("APP BIBLIOTECA");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

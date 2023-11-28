@@ -1,5 +1,7 @@
 package org.example.view;
 
+import org.example.controller.Controller;
+
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -14,6 +16,21 @@ public class VentanaAlquilarLibro extends JFrame {
 	private JPanel contentPane;
 	private JTextField textCodigo;
 	private JTextField textDNI;
+	JButton btnAlquilar;
+	JButton btnCancelar;
+
+	private Controller controller;
+
+	public void setController(Controller controller){
+		this.controller = controller;
+		btnAlquilar.addActionListener(this.controller);
+		btnAlquilar.setActionCommand("ALQUILAR");
+
+		btnCancelar.addActionListener(this.controller);
+		btnCancelar.setActionCommand("CANCELAR_ALQUILER");
+
+	}
+
 
 	public VentanaAlquilarLibro() {
 		setTitle("APP BIBLIOTECA");
@@ -21,7 +38,7 @@ public class VentanaAlquilarLibro extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		this.setLocationRelativeTo(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -50,12 +67,20 @@ public class VentanaAlquilarLibro extends JFrame {
 		lblDni.setBounds(117, 136, 74, 14);
 		contentPane.add(lblDni);
 
-		JButton btnAlquilar = new JButton("Alquilar");
+		btnAlquilar = new JButton("Alquilar");
 		btnAlquilar.setBounds(306, 227, 89, 23);
 		contentPane.add(btnAlquilar);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(26, 227, 89, 23);
 		contentPane.add(btnCancelar);
+	}
+
+	public String getIsbn(){
+		return textCodigo.getText();
+	}
+
+	public String getDNISocio(){
+		return textDNI.getText();
 	}
 }

@@ -1,5 +1,5 @@
-CREATE USER 'admin'@localhost IDENTIFIED BY 'admin';
-GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+-- CREATE USER 'admin'@localhost IDENTIFIED BY 'admin';
+-- GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
 
 CREATE DATABASE IF NOT EXISTS BIBLIOTECA;
 USE BIBLIOTECA;
@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS ALQUILERES
 (ID_ALQUILER int auto_increment,
 ISBN_LIBRO varchar(13),
 DNI_SOCIO varchar(9),
-FECHA_ALQUILER datetime,
-FECHA_DEVOLUCION datetime,
+FECHA_ALQUILER date,
+FECHA_DEVOLUCION date,
 FOREIGN KEY(ISBN_LIBRO) REFERENCES LIBROS(ISBN),
 FOREIGN KEY(DNI_SOCIO) REFERENCES SOCIOS(DNI),
 PRIMARY KEY(ID_ALQUILER));
@@ -31,6 +31,12 @@ INSERT INTO SOCIOS (DNI,nombre,apellidos) VALUES ('39490438J','Gonzalo','Campos 
 INSERT INTO SOCIOS (DNI,nombre,apellidos) VALUES ('35578855V','Nerea','Martínez Fernández');
 INSERT INTO SOCIOS (DNI,nombre,apellidos) VALUES ('36138129T','Daniel','Campos Rocha');
 
-INSERT INTO LIBROS (ISBN,titulo,autor,alquilado) VALUES ('8438231039423','El Quijote','Miguel de cervantes',false);
+INSERT INTO LIBROS (ISBN,titulo,autor,alquilado) VALUES ('8438231039423','El Quijote','Miguel de cervantes',true);
 INSERT INTO LIBROS (ISBN,titulo,autor,alquilado) VALUES ('1435231033426','La niebla','Stephen King',true);
 INSERT INTO LIBROS (ISBN,titulo,autor,alquilado) VALUES ('3438231039421','Cantares Galegos','Rosalía de Castro',false);
+INSERT INTO LIBROS (ISBN,titulo,autor,alquilado) VALUES ('5637281920382','El gran Gatsby','F. Scott Fitzgerald',false);
+
+INSERT INTO ALQUILERES(ISBN_LIBRO,DNI_SOCIO,FECHA_ALQUILER,FECHA_DEVOLUCION) VALUES('8438231039423','39490438J','2023-8-04','2023-8-14');
+INSERT INTO ALQUILERES(ISBN_LIBRO,DNI_SOCIO,FECHA_ALQUILER,FECHA_DEVOLUCION) VALUES('1435231033426','35578855V','2023-9-04','2023-9-19');
+
+

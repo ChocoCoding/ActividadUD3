@@ -1,8 +1,10 @@
 package org.example.view;
 
 import org.example.controller.Controller;
+import org.example.entities.Socio;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,12 +20,24 @@ public class VentanaVerSocios extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
 
+	public void actualizarDatos(ArrayList<Socio> ListaSocios) {
+		String[] columnHeaders = {"DNI", "Nombre", "Apellidos"};
+		DefaultTableModel model = new DefaultTableModel(columnHeaders, 0);
 
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		for (Socio sc : ListaSocios) {
+			model.addRow(new Object[] {sc.getDni(), sc.getNombre(), sc.getApellidos()});
+		}
+
+		table.setModel(model);
+	}
 
 	public VentanaVerSocios() {
 		setTitle("APP BIBLIOTECA");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -39,8 +53,5 @@ public class VentanaVerSocios extends JFrame {
 		scrollPane.setBounds(20, 60, 392, 174);
 		contentPane.add(scrollPane);
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "DNI", "Nombre", "Apellidos" }));
 	}
 }
